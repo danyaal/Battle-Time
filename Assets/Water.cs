@@ -7,6 +7,8 @@ public class Water : MonoBehaviour {
 
 	int waterPP = 10;
 	static int waterCount = 0;
+
+	bool isPlayerOwned;
 	
 	// Use this for initialization
 	void Start() {
@@ -34,7 +36,8 @@ public class Water : MonoBehaviour {
 	
 	}
 
-	public void setAttackDestination(Vector3 moveTo) {
+	public void setAttackDestination(Vector3 moveTo, bool isPlayer) {
 		destination = moveTo;
+		isPlayerOwned = isPlayer;
 	}
 }

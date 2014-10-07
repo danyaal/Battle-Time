@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
 
 	public static bool isMelee = false;
 
-	int HP = 20;
+	public int HP = 20;
 
 	// Update is called once per frame
 	void Update () {
@@ -38,6 +38,11 @@ public class Player : MonoBehaviour {
 			Melee();
 		}
 
+		// Check if dead
+		if(HP <= 0) {
+			Destroy(this.gameObject);
+		}
+
 	}
 
 	void Fire(float X, float Y) {
@@ -51,7 +56,7 @@ public class Player : MonoBehaviour {
 		moveTo.y = Y;
 		moveTo.z = 0;
 
-		fScript.setAttackDestination(moveTo);
+		fScript.setAttackDestination(moveTo, true);
 
 	}
 
@@ -66,7 +71,7 @@ public class Player : MonoBehaviour {
 		moveTo.y = Y;
 		moveTo.z = 0;
 
-		wScript.setAttackDestination(moveTo);
+		wScript.setAttackDestination(moveTo, true);
 
 	}
 
@@ -81,7 +86,7 @@ public class Player : MonoBehaviour {
 		moveTo.y = Y;
 		moveTo.z = 0;
 		
-		gScript.setAttackDestination(moveTo);
+		gScript.setAttackDestination(moveTo, true);
 	}
 
 	void Melee() {

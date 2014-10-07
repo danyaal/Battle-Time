@@ -8,6 +8,8 @@ public class Grass : MonoBehaviour {
 	int grassPP = 5;
 	static int grassCount = 0;
 	static bool isOnField = false;
+
+	bool isPlayerOwned;
 	
 	// Use this for initialization
 	void Start() {
@@ -44,7 +46,8 @@ public class Grass : MonoBehaviour {
 		
 	}
 	
-	public void setAttackDestination(Vector3 moveTo) {
+	public void setAttackDestination(Vector3 moveTo, bool isPlayer) {
 		destination = moveTo;
+		isPlayerOwned = isPlayer;
 	}
 }
