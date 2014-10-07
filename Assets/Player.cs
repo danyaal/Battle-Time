@@ -23,15 +23,15 @@ public class Player : MonoBehaviour {
 		moveTo.y = mouseLocation.y - this.transform.position.y;
 		moveTo.z = 0;
 
-		this.transform.position += moveTo*(Time.deltaTime*1.5f);
+		this.transform.position += moveTo*Time.deltaTime;
 
 		// Attack Listeners
 		if(Input.GetKeyDown("w")) {
 			Fire(moveTo.x, moveTo.y);
 		} else if(Input.GetKeyDown("a")) {
-			Water();
+			Water(moveTo.x, moveTo.y);
 		} else if(Input.GetKeyDown("s")) {
-			Grass();
+			Grass(moveTo.x, moveTo.y);
 		} else if(Input.GetKeyDown("d")) {
 			Punch();
 		}
@@ -40,29 +40,46 @@ public class Player : MonoBehaviour {
 
 	void Fire(float X, float Y) {
 		GameObject fire = Instantiate (FirePrefab) as GameObject;
-		Vector3 firePos = this.transform.position;
+		fire.transform.position = this.transform.position;
 
-		fire.transform.position = firePos;
+		Fire fScript = fire.GetComponent<Fire>();
 
-//		Vector3 moveTo = this.transform.position;
-//		moveTo.x = X - firePos.x;
-//		moveTo.y = Y - firePos.y;
-//		moveTo.z=0;
-//		firePos += moveTo*Time.deltaTime*2;
+		Vector3 moveTo = this.transform.position;
+		moveTo.x = X;
+		moveTo.y = Y;
+		moveTo.z = 0;
+
+		fScript.setAttackDestination(moveTo);
+
 	}
 
-	void Water() {
+	void Water(float X, float Y) {
 		GameObject water = Instantiate (WaterPrefab) as GameObject;
-		Vector3 waterPos = this.transform.position;
-		
-		water.transform.position = waterPos;
+		water.transform.position = this.transform.position;
+
+		Water wScript = water.GetComponent<Water>();
+
+		Vector3 moveTo = this.transform.position;
+		moveTo.x = X;
+		moveTo.y = Y;
+		moveTo.z = 0;
+
+		wScript.setAttackDestination(moveTo);
+
 	}
 
-	void Grass() {
+	void Grass(float X, float Y) {
 		GameObject grass = Instantiate (GrassPrefab) as GameObject;
-		Vector3 grassPos = this.transform.position;
+		grass.transform.position = this.transform.position;
+
+		Grass gScript = grass.GetComponent<Grass>();
+
+		Vector3 moveTo = this.transform.position;
+		moveTo.x = X;
+		moveTo.y = Y;
+		moveTo.z = 0;
 		
-		grass.transform.position = grassPos;
+		gScript.setAttackDestination(moveTo);
 	}
 
 	void Punch() {

@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Fire : MonoBehaviour {
-
+public class Water : MonoBehaviour {
+		
 	Vector3 destination;
 
-	int firePP = 50;
-	static int fireCount = 0;
-
+	int waterPP = 10;
+	static int waterCount = 0;
+	
 	// Use this for initialization
 	void Start() {
-		if(fireCount < firePP) {
-			fireCount++;
+		if(waterCount < waterPP) {
+			waterCount++;
 		} else {
 			Destroy(this.gameObject);
 		}
 	}
-	
+
+	// Update is called once per frame
 	void Update () {
 
 		// Move attack position
-		destination = destination.normalized*10;
-		this.transform.position += destination*(Time.deltaTime*2.5f);
+//		destination = destination.normalized;
+		this.transform.position += destination*(Time.deltaTime*0.001f);
 
 		// Check to see if fire left the map
 		if(Camera.main.WorldToViewportPoint(this.transform.position).x<0f ||
@@ -30,12 +31,10 @@ public class Fire : MonoBehaviour {
 		   Camera.main.WorldToViewportPoint(this.transform.position).y>1f) {
 			Destroy(this.gameObject);
 		}
-
+	
 	}
 
 	public void setAttackDestination(Vector3 moveTo) {
 		destination = moveTo;
 	}
-
-
 }
