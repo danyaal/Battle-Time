@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
 	public GameObject GrassPrefab;
 	Vector3 mouseLocation;
 
+	public static bool isMelee = false;
+
 	int HP = 20;
 
 	// Update is called once per frame
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour {
 		} else if(Input.GetKeyDown("s")) {
 			Grass(moveTo.x, moveTo.y);
 		} else if(Input.GetKeyDown("d")) {
-			Punch();
+			Melee();
 		}
 
 	}
@@ -82,8 +84,15 @@ public class Player : MonoBehaviour {
 		gScript.setAttackDestination(moveTo);
 	}
 
-	void Punch() {
-		print ("Punch");
+	void Melee() {
+		isMelee = true;
+		Vector3 mousePos = mouseLocation;
+		mousePos.x = mousePos.x - this.transform.position.x;
+		mousePos.y = mousePos.y - this.transform.position.y;
+		mousePos.z = 0;
+		mousePos = mousePos.normalized;
+		this.transform.position += mousePos;
+		isMelee = false;
 	}
 
 }
