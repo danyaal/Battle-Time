@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
+
+	Vector3 mouseLocation;
 	
 	public GameObject FirePrefab;
 	public GameObject WaterPrefab;
 	public GameObject GrassPrefab;
-	Vector3 mouseLocation;
-
 	public static bool isMelee = false;
-
 	public int HP = 20;
 
 	// Update is called once per frame
@@ -19,7 +18,7 @@ public class Player : MonoBehaviour {
 		mouseLocation = Camera.main.camera.ScreenToWorldPoint(Input.mousePosition);
 		mouseLocation.z = -1;
 
-		// Move player at coordinates
+		// Move player to coordinates
 		Vector3 moveTo = this.transform.position;
 		moveTo.x = mouseLocation.x - this.transform.position.x;
 		moveTo.y = mouseLocation.y - this.transform.position.y;

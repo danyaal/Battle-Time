@@ -7,16 +7,26 @@ public class Fire : MonoBehaviour {
 
 	int firePP = 50;
 	static int fireCount = 0;
+	static int fireCountEnemy = 0;
 
 	bool isPlayerOwned = false;
 
 	// Use this for initialization
 	void Start() {
-		if(fireCount < firePP) {
-			fireCount++;
+		if(isPlayerOwned) {
+			if(fireCount < firePP) {
+				fireCount++;
+			} else {
+				Destroy(this.gameObject);
+			}
 		} else {
-			Destroy(this.gameObject);
+			if(fireCountEnemy < firePP) {
+				fireCountEnemy++;
+			} else {
+				Destroy(this.gameObject);
+			}
 		}
+
 	}
 	
 	void Update () {
@@ -46,6 +56,10 @@ public class Fire : MonoBehaviour {
 			GameObject player = GameObject.FindGameObjectWithTag("player");
 			Player pScript = player.GetComponent<Player>();
 			pScript.HP--;
+			GameObject playerhp = GameObject.FindGameObjectWithTag("playerhp");
+			Vector3 a = Vector3.zero;
+			a.x = 0.05f*2;
+			playerhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);
 		} else if(col.CompareTag("fire")) {
@@ -69,6 +83,10 @@ public class Fire : MonoBehaviour {
 			GameObject enemy = GameObject.FindGameObjectWithTag("enemy");
 			Enemy eScript = enemy.GetComponent<Enemy>();
 			eScript.HP--;
+			GameObject enemyhp = GameObject.FindGameObjectWithTag("enemyhp");
+			Vector3 a = Vector3.zero;
+			a.x = 0.05f*2;
+			enemyhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);
 		}
