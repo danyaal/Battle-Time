@@ -11,4 +11,4 @@ Imagine if the battle sequences of Pokemon were real-time instead of turn based.
   * W - Shoot small things
   * A - Drop small things
   * S - Shoot big things
-  * D - Melee
+  * D - Dash

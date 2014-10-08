@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour {
 	public GameObject FirePrefab;
 	public GameObject WaterPrefab;
 	public GameObject GrassPrefab;
-	public static bool isMelee = false;
 	public int HP = 20;
 
 	// AI Flags

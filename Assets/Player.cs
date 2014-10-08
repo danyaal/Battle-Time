@@ -8,7 +8,6 @@ public class Player : MonoBehaviour {
 	public GameObject FirePrefab;
 	public GameObject WaterPrefab;
 	public GameObject GrassPrefab;
-	public static bool isMelee = false;
 	public int HP = 20;
 
 	// Update is called once per frame
@@ -34,7 +33,7 @@ public class Player : MonoBehaviour {
 		} else if(Input.GetKeyDown("s")) {
 			Grass(moveTo.x, moveTo.y);
 		} else if(Input.GetKeyDown("d")) {
-			Melee();
+			Dash();
 		}
 
 		// Check if dead
@@ -97,15 +96,13 @@ public class Player : MonoBehaviour {
 		gScript.setAttackDestination(moveTo, true);
 	}
 
-	void Melee() {
-		isMelee = true;
+	void Dash() {
 		Vector3 mousePos = mouseLocation;
 		mousePos.x = mousePos.x - this.transform.position.x;
 		mousePos.y = mousePos.y - this.transform.position.y;
 		mousePos.z = 0;
 		mousePos = mousePos.normalized;
 		this.transform.position += mousePos;
-		isMelee = false;
 	}
 
 }
