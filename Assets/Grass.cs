@@ -101,4 +101,9 @@ public class Grass : MonoBehaviour {
 			enemyhp.transform.localScale -= a;
 		}
 	}
+
+	public void Reload() {
+		grassCount = 0;
+		grassCountEnemy = 0;
+	}
 }

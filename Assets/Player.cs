@@ -40,6 +40,15 @@ public class Player : MonoBehaviour {
 		// Check if dead
 		if(HP <= 0) {
 			Destroy(this.gameObject);
+			Application.LoadLevel("_GameOver");
+			Fire fScript = FirePrefab.GetComponent<Fire>();
+			fScript.Reload();
+
+			Water wScript = WaterPrefab.GetComponent<Water>();
+			wScript.Reload();
+
+			Grass gScript = GrassPrefab.GetComponent<Grass>();
+			gScript.Reload();
 		}
 
 	}

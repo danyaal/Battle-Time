@@ -92,4 +92,9 @@ public class Water : MonoBehaviour {
 		}
 	}
 
+	public void Reload() {
+		waterCount = 0;
+		waterCountEnemy = 0;
+	}
+
 }

@@ -92,5 +92,10 @@ public class Fire : MonoBehaviour {
 		}
 	}
 
+	public void Reload() {
+		fireCount = 0;
+		fireCountEnemy = 0;
+	}
+
 
 }
