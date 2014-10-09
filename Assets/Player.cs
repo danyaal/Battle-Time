@@ -23,6 +23,15 @@ public class Player : MonoBehaviour {
 		moveTo.y = mouseLocation.y - this.transform.position.y;
 		moveTo.z = 0;
 
+		Vector3 whereTo = this.transform.position;
+		whereTo += moveTo*Time.deltaTime;
+		if(System.Math.Abs(whereTo.x) > 16.5f/2f) {
+			moveTo.x = 0;
+		}
+		if(System.Math.Abs(whereTo.y) > 9.5f/2f) {
+			moveTo.y = 0;
+		}
+
 		this.transform.position += moveTo*Time.deltaTime;
 
 		// Attack Listeners
