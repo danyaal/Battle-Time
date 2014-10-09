@@ -6,8 +6,12 @@ public class Main : MonoBehaviour {
 	public GameObject PlayerPrefab;
 	public GameObject EnemyPrefab;
 
+	bool isGameOver = false;
+
 	// Use this for initialization
 	void Start () {
+
+		isGameOver = false;
 
 		// Init player
 		GameObject player = Instantiate (PlayerPrefab) as GameObject;
@@ -22,6 +26,17 @@ public class Main : MonoBehaviour {
 		startPos.z = -1;
 		startPos.x = 5;
 		enemy.transform.position = startPos;
+	}
+
+	// Update is called once per frame
+	void Update() {
+		if (isGameOver && Input.GetKeyDown ("space")) {
+			Application.LoadLevel("_Intro");
+		}
+	}
+
+	public void gameIsOver() {
+		isGameOver = true;
 	}
 
 }

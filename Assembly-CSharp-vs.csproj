@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Enemy.cs" />
      <Compile Include="Assets\Fire.cs" />
-     <Compile Include="Assets\GameOver.cs" />
      <Compile Include="Assets\Grass.cs" />
      <Compile Include="Assets\Intro.cs" />
      <Compile Include="Assets\Main.cs" />

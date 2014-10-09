@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: 1510a739ccbfa4f388562a7f6fe2c5b1
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FirePrefab: {fileID: 100000, guid: a09a6011ab09e4ae881af8915c3b74ab, type: 2}
+  - WaterPrefab: {fileID: 100000, guid: 937385530fc534d51b549915a8d4becb, type: 2}
+  - GrassPrefab: {fileID: 100000, guid: 30454ad1e91d5409496b5f2cc8acd662, type: 2}
+  - winner: {fileID: 100000, guid: 63e2382a6924f44e9824b86e3438e859, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

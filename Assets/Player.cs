@@ -48,7 +48,7 @@ public class Player : MonoBehaviour {
 		// Check if dead
 		if(HP <= 0) {
 			Destroy(this.gameObject);
-			Application.LoadLevel("_GameOver");
+
 			Fire fScript = FirePrefab.GetComponent<Fire>();
 			fScript.Reload();
 
@@ -57,6 +57,14 @@ public class Player : MonoBehaviour {
 
 			Grass gScript = GrassPrefab.GetComponent<Grass>();
 			gScript.Reload();
+
+			GameObject ew = GameObject.FindGameObjectWithTag("enemywin");
+			ew.guiText.enabled = true;
+			GameObject sb = GameObject.FindGameObjectWithTag("spacebar");
+			sb.guiText.enabled = true;
+
+			Main m = Camera.main.camera.GetComponent<Main>();
+			m.gameIsOver();
 		}
 
 	}
