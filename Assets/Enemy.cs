@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour {
 	float timePassed=0f;
 	float timeBetweenShoot = 0.1f;
 
+	float changeTimeAI=0f;
+	float timeBetweenChangeAI = 5f;
+
 	// AI Flags
 	bool chaser = false;
 	bool runner = false;
@@ -25,75 +28,92 @@ public class Enemy : MonoBehaviour {
 	void Update () {
 
 		timePassed += Time.deltaTime;
+		changeTimeAI += Time.deltaTime;
+
+		// Consider changing strategy
+		if(changeTimeAI > timeBetweenChangeAI) {
+			if(Random.Range (1,4) == 1) {
+				runner = true;
+				chaser = false;
+			} else {
+				chaser = true;
+				runner = false;
+			}
+			changeTimeAI = 0f;
+		}
+
+		GameObject player = GameObject.FindGameObjectWithTag("player");
+		Vector3 moveTo = Vector3.zero;
 
 		// Simulate AI
 		if(chaser) {
-			print ("chasing");
+			// Move player to coordinates
+			moveTo.x = (player.transform.position.x) - this.transform.position.x;
+			moveTo.y = (player.transform.position.y * 0.9f) - this.transform.position.y;
+			moveTo.z = 0;
+			
+			this.transform.position += moveTo*Time.deltaTime;
 		} else if(runner) {
 
-			GameObject player = GameObject.FindGameObjectWithTag("player");
-
 			// Move player to coordinates
-			Vector3 moveTo = Vector3.zero;
 			moveTo.x = (player.transform.position.x * -1) - this.transform.position.x;
 			moveTo.y = (player.transform.position.y * -1) - this.transform.position.y;
 			moveTo.z = 0;
 
 			this.transform.position += moveTo*Time.deltaTime;
+		}
 
-			// If so, do attack
-			if(timePassed > timeBetweenShoot) {
-				
-				// Get info about player location
-				double distance = System.Math.Sqrt(System.Math.Pow(player.transform.position.x + this.transform.position.x, 2) + System.Math.Pow(player.transform.position.y + this.transform.position.y, 2));
-				
-				// Shoot fire if within range in the x direction
-				if(distance > 0.5f) {
-					if(this.transform.position.y + 0.2 > player.transform.position.y && 
-					   this.transform.position.y - 0.2 < player.transform.position.y) {
-						
-						Vector3 shootAt = this.transform.position;
-						if(this.transform.position.x < player.transform.position.x) {
-							shootAt.x = 1;
-						} else {
-							shootAt.x = -1;
-						}
-						shootAt.y = 0;
-						shootAt.z = 0;
-						
-						Fire(shootAt);
-						timePassed = 0f;
+		// If so, do attack
+		if(timePassed > timeBetweenShoot) {
+			
+			// Get info about player location
+			double distance = System.Math.Sqrt(System.Math.Pow(player.transform.position.x + this.transform.position.x, 2) + System.Math.Pow(player.transform.position.y + this.transform.position.y, 2));
+			
+			// Shoot fire if within range in the x direction
+			if(distance > 0.5f) {
+				if(this.transform.position.y + 0.2 > player.transform.position.y && 
+				   this.transform.position.y - 0.2 < player.transform.position.y) {
+					
+					Vector3 shootAt = this.transform.position;
+					if(this.transform.position.x < player.transform.position.x) {
+						shootAt.x = 1;
+					} else {
+						shootAt.x = -1;
 					}
-					if(this.transform.position.x + 0.2 > player.transform.position.x && 
-					   this.transform.position.x - 0.2 < player.transform.position.x) {
-						
-						Vector3 shootAt = this.transform.position;
-						shootAt.x = 0;
-						if(this.transform.position.y < player.transform.position.y) {
-							shootAt.y = 1;
-						} else {
-							shootAt.y = -1;
-						}
-						shootAt.z = 0;
-						
-						Fire(shootAt);
-						timePassed = 0f;
-					}
-				}
-				// Shoot grass when player gets too close
-				else if(distance < 1f) {
-					Grass(player.transform.position);
+					shootAt.y = 0;
+					shootAt.z = 0;
+					
+					Fire(shootAt);
 					timePassed = 0f;
 				}
-				// Randomly drop water
-				if(Random.Range(1, 100) == 7) {
-					Water(moveTo);
+				if(this.transform.position.x + 0.2 > player.transform.position.x && 
+				   this.transform.position.x - 0.2 < player.transform.position.x) {
+					
+					Vector3 shootAt = this.transform.position;
+					shootAt.x = 0;
+					if(this.transform.position.y < player.transform.position.y) {
+						shootAt.y = 1;
+					} else {
+						shootAt.y = -1;
+					}
+					shootAt.z = 0;
+					
+					Fire(shootAt);
 					timePassed = 0f;
 				}
 			}
-
+			// Shoot grass when player gets too close
+			else if(distance < 1f) {
+				Grass(player.transform.position);
+				timePassed = 0f;
+			}
+			// Randomly drop water
+			if(Random.Range(1, 100) == 7) {
+				Water(moveTo);
+				timePassed = 0f;
+			}
 		}
-
+		
 		// Check if dead
 		if(HP <= 0) {
 			Destroy(this.gameObject);
