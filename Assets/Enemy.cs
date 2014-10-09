@@ -85,8 +85,8 @@ public class Enemy : MonoBehaviour {
 					Grass(player.transform.position);
 					timePassed = 0f;
 				}
-				// Else drop water
-				else {
+				// Randomly drop water
+				if(Random.Range(1, 100) == 7) {
 					Water(moveTo);
 					timePassed = 0f;
 				}
