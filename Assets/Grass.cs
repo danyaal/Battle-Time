@@ -84,8 +84,10 @@ public class Grass : MonoBehaviour {
 			// Destroy grass
 			Grass grass = col.GetComponent<Grass>();
 			Destroy(grass.gameObject);
+			isOnFieldEnemy = false;
 			// Destroy this
 			Destroy(this.gameObject);
+			isOnField = false;
 		} else if(col.CompareTag("water")) {
 			// Destroy water
 			Water water = col.GetComponent<Water>();

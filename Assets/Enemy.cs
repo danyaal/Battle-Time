@@ -8,20 +8,29 @@ public class Enemy : MonoBehaviour {
 	public GameObject GrassPrefab;
 	public int HP = 20;
 
+	float timePassed=0f;
+	float timeBetweenShoot = 0.1f;
+
 	// AI Flags
 	bool chaser = false;
 	bool runner = false;
 
 	// Use this for initialization
 	void Start () {
+		// Initialize AI
 		runner = true;
 	}
 
 	// Update is called once per frame
 	void Update () {
+
+		timePassed += Time.deltaTime;
+
+		// Simulate AI
 		if(chaser) {
 			print ("chasing");
 		} else if(runner) {
+
 			GameObject player = GameObject.FindGameObjectWithTag("player");
 
 			// Move player to coordinates
@@ -32,47 +41,55 @@ public class Enemy : MonoBehaviour {
 
 			this.transform.position += moveTo*Time.deltaTime;
 
-			// ATTACKS
-
-			double distance = System.Math.Sqrt(System.Math.Pow(player.transform.position.x + this.transform.position.x, 2) + System.Math.Pow(player.transform.position.y + this.transform.position.y, 2));
-
-			// Shoot fire if within range in the x direction
-			if(distance > 0.5f) {
-				if(this.transform.position.y + 0.2 > player.transform.position.y && 
-				   this.transform.position.y - 0.2 < player.transform.position.y) {
-					
-					Vector3 shootAt = this.transform.position;
-					if(this.transform.position.x < player.transform.position.x) {
-						shootAt.x = 1;
-					} else {
-						shootAt.x = -1;
+			// If so, do attack
+			if(timePassed > timeBetweenShoot) {
+				
+				// Get info about player location
+				double distance = System.Math.Sqrt(System.Math.Pow(player.transform.position.x + this.transform.position.x, 2) + System.Math.Pow(player.transform.position.y + this.transform.position.y, 2));
+				
+				// Shoot fire if within range in the x direction
+				if(distance > 0.5f) {
+					if(this.transform.position.y + 0.2 > player.transform.position.y && 
+					   this.transform.position.y - 0.2 < player.transform.position.y) {
+						
+						Vector3 shootAt = this.transform.position;
+						if(this.transform.position.x < player.transform.position.x) {
+							shootAt.x = 1;
+						} else {
+							shootAt.x = -1;
+						}
+						shootAt.y = 0;
+						shootAt.z = 0;
+						
+						Fire(shootAt);
+						timePassed = 0f;
 					}
-					shootAt.y = 0;
-					shootAt.z = 0;
-					
-					Fire(shootAt);
-				}
-				if(this.transform.position.x + 0.2 > player.transform.position.x && 
-				   this.transform.position.x - 0.2 < player.transform.position.x) {
-					
-					Vector3 shootAt = this.transform.position;
-					shootAt.x = 0;
-					if(this.transform.position.y < player.transform.position.y) {
-						shootAt.y = 1;
-					} else {
-						shootAt.y = -1;
+					if(this.transform.position.x + 0.2 > player.transform.position.x && 
+					   this.transform.position.x - 0.2 < player.transform.position.x) {
+						
+						Vector3 shootAt = this.transform.position;
+						shootAt.x = 0;
+						if(this.transform.position.y < player.transform.position.y) {
+							shootAt.y = 1;
+						} else {
+							shootAt.y = -1;
+						}
+						shootAt.z = 0;
+						
+						Fire(shootAt);
+						timePassed = 0f;
 					}
-					shootAt.z = 0;
-					
-					Fire(shootAt);
 				}
-			}
-			// Shoot grass when player gets too close
-			else if(distance < 1f) {
-				Grass(player.transform.position);
-			}
-			else {
-				Water(moveTo);
+				// Shoot grass when player gets too close
+				else if(distance < 1f) {
+					Grass(player.transform.position);
+					timePassed = 0f;
+				}
+				// Else drop water
+				else {
+					Water(moveTo);
+					timePassed = 0f;
+				}
 			}
 
 		}
