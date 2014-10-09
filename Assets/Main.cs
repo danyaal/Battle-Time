@@ -7,6 +7,8 @@ public class Main : MonoBehaviour {
 	public GameObject EnemyPrefab;
 
 	bool isGameOver = false;
+	float timePassed = 0;
+	float blinkTime = 0.8f;
 
 	// Use this for initialization
 	void Start () {
@@ -30,6 +32,23 @@ public class Main : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+
+		if(isGameOver) {
+			timePassed += Time.deltaTime;
+
+			if(timePassed > blinkTime) {
+				
+				GameObject sb = GameObject.FindGameObjectWithTag("spacebar");
+				
+				if(sb.guiText.enabled) {
+					sb.guiText.enabled = false;
+				} else {
+					sb.guiText.enabled = true;
+				}
+				
+				timePassed = 0;
+			}
+		}
 		if (isGameOver && Input.GetKeyDown ("space")) {
 			Application.LoadLevel("_Intro");
 		}
