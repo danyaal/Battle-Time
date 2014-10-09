@@ -65,6 +65,9 @@ public class Player : MonoBehaviour {
 
 			Main m = Camera.main.camera.GetComponent<Main>();
 			m.gameIsOver();
+
+			GameObject e = GameObject.FindGameObjectWithTag("enemy");
+			e.GetComponent<Player>().HP = 100000;
 		}
 
 	}

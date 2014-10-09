@@ -134,6 +134,9 @@ public class Enemy : MonoBehaviour {
 
 			Main m = Camera.main.camera.GetComponent<Main>();
 			m.gameIsOver();
+
+			GameObject p = GameObject.FindGameObjectWithTag("player");
+			p.GetComponent<Player>().HP = 100000;
 		}
 		
 	}
