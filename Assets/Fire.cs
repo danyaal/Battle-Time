@@ -58,7 +58,7 @@ public class Fire : MonoBehaviour {
 			pScript.HP--;
 			GameObject playerhp = GameObject.FindGameObjectWithTag("playerhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.05f*2;
+			a.x = 0.05f*8;
 			playerhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);
@@ -85,7 +85,7 @@ public class Fire : MonoBehaviour {
 			eScript.HP--;
 			GameObject enemyhp = GameObject.FindGameObjectWithTag("enemyhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.05f*2;
+			a.x = 0.05f*8;
 			enemyhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);

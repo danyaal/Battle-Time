@@ -55,10 +55,10 @@ public class Water : MonoBehaviour {
 			// Remove HP From Player
 			GameObject player = GameObject.FindGameObjectWithTag("player");
 			Player pScript = player.GetComponent<Player>();
-			pScript.HP-=2*2;
+			pScript.HP-=2;
 			GameObject playerhp = GameObject.FindGameObjectWithTag("playerhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.1f;
+			a.x = 0.1f*8;
 			playerhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);
@@ -85,7 +85,7 @@ public class Water : MonoBehaviour {
 			eScript.HP-=2;
 			GameObject enemyhp = GameObject.FindGameObjectWithTag("enemyhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.1f*2;
+			a.x = 0.1f*8;
 			enemyhp.transform.localScale -= a;
 			// Destroy this
 			Destroy(this.gameObject);

@@ -74,7 +74,7 @@ public class Grass : MonoBehaviour {
 			pScript.HP-=3;
 			GameObject playerhp = GameObject.FindGameObjectWithTag("playerhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.15f*2;
+			a.x = 0.15f*8;
 			playerhp.transform.localScale -= a;
 		} else if(col.CompareTag("fire")) {
 			// Destroy fire
@@ -99,7 +99,7 @@ public class Grass : MonoBehaviour {
 			eScript.HP-=3;
 			GameObject enemyhp = GameObject.FindGameObjectWithTag("enemyhp");
 			Vector3 a = Vector3.zero;
-			a.x = 0.15f*2;
+			a.x = 0.15f*8;
 			enemyhp.transform.localScale -= a;
 		}
 	}
