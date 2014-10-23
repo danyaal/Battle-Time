@@ -12,3 +12,6 @@ Imagine if the battle sequences of Pokemon were real-time instead of turn based.
   * A - Drop small things
   * S - Shoot big things
   * D - Dash
+
+##Demo
+[http://thedanyaal.com/games/BattleTime/](http://thedanyaal.com/games/BattleTime/)
